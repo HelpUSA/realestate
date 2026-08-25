@@ -22,28 +22,9 @@ export default async function HomePage() {
     orderBy: { createdAt: 'desc' },
   });
 
-  const realtors = await prisma.user.findMany({
-    where: { role: 'CORRETOR', status: 'ACTIVE' },
-    select: {
-      id: true,
-      name: true,
-      creci: true,
-      phone: true,
-      whatsapp: true,
-      bio: true,
-      avatarUrl: true,
-      coverUrl: true,
-      agencyName: true,
-      _count: {
-        select: { properties: true },
-      },
-    },
-  });
-
   return (
     <HomePageClient
       featuredProperties={featuredProperties}
-      realtors={realtors}
     />
   );
 }

@@ -2,20 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Sparkles, Building2, Users, MapPin, MessageSquare } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Sparkles, Building2, MapPin, MessageSquare } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSearch from '@/components/HeroSearch';
 import PropertyCard from '@/components/PropertyCard';
-import RealtorCard from '@/components/RealtorCard';
 import { translations, getLang, Language } from '@/lib/i18n';
 
 interface HomePageClientProps {
   featuredProperties: any[];
-  realtors: any[];
 }
 
-export default function HomePageClient({ featuredProperties, realtors }: HomePageClientProps) {
+export default function HomePageClient({ featuredProperties }: HomePageClientProps) {
   const [lang, setLang] = useState<Language>('en');
 
   useEffect(() => {
@@ -29,26 +27,26 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
 
   const t = translations[lang];
 
-  // Popular Neighborhoods Data translated
+  // Flexible Popular Destinations Data
   const popularNeighborhoods = [
     {
-      name: 'Cabo Branco',
-      desc: lang === 'en' ? 'Beachfront & High Appreciation' : lang === 'es' ? 'Frente al Mar y Alta Plusvalía' : 'Beira-mar e alta valorização',
+      name: lang === 'en' ? 'Beachfront & Coastal' : lang === 'es' ? 'Frente al Mar' : 'Beira-mar & Orla',
+      desc: lang === 'en' ? 'Apartments, homes, and vacation residences' : lang === 'es' ? 'Apartamentos, casas y residencias' : 'Apartamentos, casas e residências de praia',
       img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80',
     },
     {
-      name: 'Altiplano',
-      desc: lang === 'en' ? 'Penthouse Duplex & 360° Skyline Views' : lang === 'es' ? 'Áticos Duplex y Vistas 360°' : 'Coberturas duplex e vista 360°',
+      name: lang === 'en' ? 'Urban Centers' : lang === 'es' ? 'Centros Urbanos' : 'Centros Urbanos',
+      desc: lang === 'en' ? 'Penthouses, modern condos, and city living' : lang === 'es' ? 'Áticos, condominios modernos y ciudad' : 'Coberturas, condomínios modernos e praticidade',
       img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
     },
     {
-      name: 'Manaíra',
-      desc: lang === 'en' ? 'Ocean Block & Fine Dining' : lang === 'es' ? 'Cuadra del Mar y Alta Gastronomía' : 'Quadra do mar e gastronomia',
+      name: lang === 'en' ? 'Commercial Spaces' : lang === 'es' ? 'Espacios Comerciales' : 'Espaços Comerciais',
+      desc: lang === 'en' ? 'Offices, retail stores, and business hubs' : lang === 'es' ? 'Oficinas, locales comerciales y negocios' : 'Salas comerciais, lojas e escritórios',
       img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
     },
     {
-      name: 'Gulf Shores, AL',
-      desc: lang === 'en' ? 'White Sand Beach Condos & Coastal Living' : lang === 'es' ? 'Condominios de Playa y Vida Costera' : 'Condomínios de praia e alto padrão',
+      name: lang === 'en' ? 'Gated Communities' : lang === 'es' ? 'Barrios Privados & Terrenos' : 'Condomínios Fechados',
+      desc: lang === 'en' ? 'Houses, lots, and land for custom builds' : lang === 'es' ? 'Casas, lotes y terrenos para construir' : 'Casas, lotes e terrenos para construir',
       img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
     },
   ];
@@ -97,18 +95,18 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
         )}
       </section>
 
-      {/* Popular Locations Section */}
+      {/* Flexible Property Categories Section (No fixed location names) */}
       <section className="py-16 bg-slate-950/80 border-y border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-3 mb-12 max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-widest">
-              <MapPin className="w-4 h-4" /> {lang === 'en' ? 'Prime Coastal Destinations' : lang === 'es' ? 'Ubicaciones de Alta Plusvalía' : 'Localizações Nobres'}
+              <MapPin className="w-4 h-4" /> {lang === 'en' ? 'Featured Categories & Regions' : lang === 'es' ? 'Categorías y Regiones Destacadas' : 'Categorias & Regiões em Destaque'}
             </div>
             <h2 className="text-3xl font-sans font-extrabold text-white">
-              {lang === 'en' ? 'Most Desirable' : lang === 'es' ? 'Barrios Más Buscados en' : 'Bairros Mais Procurados em'} <span className="text-blue-400">{lang === 'en' ? 'Premier Locations' : 'João Pessoa & Gulf Coast'}</span>
+              {lang === 'en' ? 'Explore Properties' : lang === 'es' ? 'Explora Inmuebles en' : 'Explore Imóveis em'} <span className="text-blue-400">{lang === 'en' ? 'Any Location' : lang === 'es' ? 'Cualquier Región' : 'Qualquer Região'}</span>
             </h2>
             <p className="text-slate-400 text-sm">
-              {lang === 'en' ? 'Explore exclusive residences in high-yield coastal regions.' : lang === 'es' ? 'Explora propiedades en las zonas con mayor revalorización.' : 'Explore imóveis nas regiões com maior índice de valorização e qualidade de vida.'}
+              {lang === 'en' ? 'Find residential, commercial, and land opportunities across all regions.' : lang === 'es' ? 'Encuentra oportunidades residenciales, comerciales y terrenos en todas las regiones.' : 'Encontre oportunidades residenciais, comerciais e terrenos em diversas regiões.'}
             </p>
           </div>
 
@@ -116,7 +114,7 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
             {popularNeighborhoods.map((b) => (
               <Link
                 key={b.name}
-                href={`/imoveis?neighborhood=${encodeURIComponent(b.name)}`}
+                href="/imoveis"
                 className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all shadow-xl"
               >
                 <img
@@ -134,27 +132,6 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Registered Realtors Grid */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center space-y-3 mb-12 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-widest">
-            <Users className="w-4 h-4" /> {t.realtors.badge}
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-white">
-            {t.realtors.title} <span className="text-blue-400">{t.realtors.titleHighlight}</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            {t.realtors.subtitle}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {realtors.map((realtor: any) => (
-            <RealtorCard key={realtor.id} realtor={realtor} />
-          ))}
         </div>
       </section>
 
@@ -191,7 +168,7 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
                 {lang === 'en' ? 'Independent Realtor Portal' : lang === 'es' ? 'Portal de Agentes Autónomos' : 'Logins com Autonomia'}
               </h3>
               <p className="text-slate-400 text-sm leading-relaxed">
-                {lang === 'en' ? 'Each licensed agent manages their own portfolio, uploads high-res photos & videos, and receives leads directly.' : lang === 'es' ? 'Cada agente gestiona sus propias ofertas, sube fotos, videos y recibe contactos de clientes.' : 'Cada corretor gerencia suas próprias ofertas, envia fotos, vídeos e recebe mensagens de compradores diretamente.'}
+                {lang === 'en' ? 'Each licensed agent manages their own portfolio, uploads photos & details, and receives leads directly.' : lang === 'es' ? 'Cada agente gestiona sus propias ofertas, sube fotos y recibe contactos de clientes.' : 'Cada corretor gerencia suas próprias ofertas, envia fotos, vídeos e recebe mensagens de compradores diretamente.'}
               </p>
             </div>
 
@@ -203,7 +180,7 @@ export default function HomePageClient({ featuredProperties, realtors }: HomePag
                 {lang === 'en' ? 'Direct Buyer Contacts' : lang === 'es' ? 'Contacto Directo Sin Intermediarios' : 'Contato sem Intermediários'}
               </h3>
               <p className="text-slate-400 text-sm leading-relaxed">
-                {lang === 'en' ? 'Qualified buyer leads route instantly to the listing realtor via WhatsApp (+55 83 99872-1848) or email.' : lang === 'es' ? 'Los contactos de compradores se dirigen al instante al WhatsApp o correo del agente responsable.' : 'Leads de compradores são direcionados na hora para o WhatsApp ou e-mail do corretor responsável pelo imóvel.'}
+                {lang === 'en' ? 'Buyer leads route instantly to the listing realtor via WhatsApp (+55 83 99872-1848) or email.' : lang === 'es' ? 'Los contactos de compradores se dirigen al instante al WhatsApp o correo del agente responsable.' : 'Leads de compradores são direcionados na hora para o WhatsApp ou e-mail do corretor responsável pelo imóvel.'}
               </p>
             </div>
           </div>
