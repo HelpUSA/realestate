@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { Building2, Search, Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map } from 'lucide-react';
 
+import { LanguagePopdown } from './LanguagePopdown';
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -44,20 +46,22 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo: HelpUS Imóveis */}
+        {/* Brand Logo: HelpUS RealEstate */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-xl bg-gold-gradient flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
-            <Building2 className="w-6 h-6" />
-          </div>
+          <img
+            src="/helpus_logo.png"
+            alt="HelpUS Logo"
+            className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-800 shadow-md group-hover:scale-105 transition-transform"
+          />
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-xl tracking-tight text-white font-serif">HelpUS</span>
               <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                IMÓVEIS
+                REAL ESTATE
               </span>
             </div>
             <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
-              Portal Guarda-Chuva de Corretores
+              HelpUS LLC • Baldwin County AL 36542
             </p>
           </div>
         </Link>
@@ -99,6 +103,9 @@ export default function Navbar() {
 
         {/* Desktop Action & Auth Menu */}
         <div className="hidden md:flex items-center gap-4">
+          {/* Language Popdown Dropdown */}
+          <LanguagePopdown />
+
           {/* Favorites counter */}
           <Link
             href="/dashboard/cliente"

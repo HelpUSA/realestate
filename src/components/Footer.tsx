@@ -9,17 +9,19 @@ export default function Footer() {
           {/* Brand & About */}
           <div className="space-y-4 md:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gold-gradient flex items-center justify-center text-slate-950 font-bold shadow-md shadow-amber-500/20">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <span className="font-extrabold text-xl tracking-tight text-white font-serif">HelpUS IMÓVEIS</span>
+              <img
+                src="/helpus_logo.png"
+                alt="HelpUS Logo"
+                className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-800 shadow-md"
+              />
+              <span className="font-extrabold text-xl tracking-tight text-white font-serif">HelpUS RealEstate</span>
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
-              A plataforma guarda-chuva da HelpUS que reúne os melhores imóveis de alto padrão e corretores credenciados da região.
+              HelpUS LLC • Baldwin County, Gulf Shores, AL 36542. Premier Real Estate & Realtor Network.
             </p>
             <div className="pt-2 flex items-center gap-2 text-xs text-amber-400 font-semibold">
               <ShieldCheck className="w-4 h-4 text-amber-400" />
-              <span>Corretores 100% Verificados & Registrados</span>
+              <span>100% Verified Licensed Realtors & Exclusive Listings</span>
             </div>
           </div>
 
