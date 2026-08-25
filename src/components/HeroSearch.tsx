@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin, Building, Sparkles } from 'lucide-react';
 import { translations, getLang, Language } from '@/lib/i18n';
+import AmbientMeshBackground from '@/components/AmbientMeshBackground';
 
 export default function HeroSearch() {
   const router = useRouter();
@@ -39,6 +40,9 @@ export default function HeroSearch() {
 
   return (
     <div className="relative min-h-[75vh] flex items-center justify-center pt-10 pb-16 overflow-hidden bg-slate-950">
+      {/* Animated Ambient Glowing Mesh Background */}
+      <AmbientMeshBackground />
+
       {/* Background Image overlay */}
       <div className="absolute inset-0 z-0">
         <img
