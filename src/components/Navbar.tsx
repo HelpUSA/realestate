@@ -6,6 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { Building2, Search, Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map } from 'lucide-react';
 
 import { LanguagePopdown } from './LanguagePopdown';
+import { translations, getLang } from '@/lib/i18n';
 
 export default function Navbar() {
   const router = useRouter();
@@ -14,10 +15,19 @@ export default function Navbar() {
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [lang, setLang] = useState<'en' | 'es' | 'pt'>('en');
 
   useEffect(() => {
     fetchUserAndFavorites();
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const savedLang = localStorage.getItem('helpus_lang');
+      setLang(getLang(urlLang || savedLang || 'en'));
+    }
   }, [pathname]);
+
+  const t = translations[lang];
 
   const fetchUserAndFavorites = async () => {
     try {
@@ -72,13 +82,13 @@ export default function Navbar() {
             href="/"
             className={`hover:text-amber-400 transition-colors ${pathname === '/' ? 'text-amber-400 font-semibold' : ''}`}
           >
-            Início
+            {t.nav.home}
           </Link>
           <Link
             href="/imoveis"
             className={`hover:text-amber-400 transition-colors ${pathname.startsWith('/imoveis') ? 'text-amber-400 font-semibold' : ''}`}
           >
-            Buscar Imóveis
+            {t.nav.properties}
           </Link>
 
           {/* Direct Map Link */}
@@ -90,14 +100,14 @@ export default function Navbar() {
                 : 'bg-amber-500/10 text-amber-300 border border-amber-500/30 hover:bg-amber-500/20'
             }`}
           >
-            <Map className="w-3.5 h-3.5" /> Ver Mapa de Imóveis
+            <Map className="w-3.5 h-3.5" /> {t.nav.map}
           </Link>
 
           <Link
             href="/corretores"
             className={`hover:text-amber-400 transition-colors ${pathname.startsWith('/corretores') ? 'text-amber-400 font-semibold' : ''}`}
           >
-            Nossos Corretores
+            {t.nav.realtors}
           </Link>
         </nav>
 
