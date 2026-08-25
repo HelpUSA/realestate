@@ -1,7 +1,26 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Building2, Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, Heart, MessageCircle } from 'lucide-react';
+import { translations, getLang, Language } from '@/lib/i18n';
 
 export default function Footer() {
+  const [lang, setLang] = useState<Language>('en');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const savedLang = localStorage.getItem('helpus_lang');
+      setLang(getLang(urlLang || savedLang || 'en'));
+    }
+  }, []);
+
+  const t = translations[lang];
+  const officialPhone = '5583998721848';
+  const whatsappUrl = `https://wa.me/${officialPhone}?text=${encodeURIComponent(t.whatsappMessage)}`;
+
   return (
     <footer className="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,36 +36,36 @@ export default function Footer() {
               <span className="font-extrabold text-xl tracking-tight text-white font-serif">HelpUS RealEstate</span>
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
-              HelpUS LLC • Baldwin County, Gulf Shores, AL 36542. Premier Real Estate & Realtor Network.
+              {t.footer.brandDesc}
             </p>
             <div className="pt-2 flex items-center gap-2 text-xs text-amber-400 font-semibold">
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
-              <span>100% Verified Licensed Realtors & Exclusive Listings</span>
+              <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>{t.footer.verifiedBadge}</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase">Navegação</h4>
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase">{t.footer.navTitle}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/imoveis?transaction=SALE" className="hover:text-amber-400 transition-colors">
-                  Imóveis à Venda
+                  {t.footer.forSale}
                 </Link>
               </li>
               <li>
                 <Link href="/imoveis?transaction=RENT" className="hover:text-amber-400 transition-colors">
-                  Imóveis para Alugar
+                  {t.footer.forRent}
                 </Link>
               </li>
               <li>
                 <Link href="/mapa" className="text-amber-300 hover:text-amber-400 transition-colors font-bold">
-                  🗺️ Mapa de Imóveis
+                  🗺️ {t.nav.map}
                 </Link>
               </li>
               <li>
                 <Link href="/corretores" className="hover:text-amber-400 transition-colors">
-                  Encontrar um Corretor
+                  {t.nav.realtors}
                 </Link>
               </li>
             </ul>
@@ -54,7 +73,7 @@ export default function Footer() {
 
           {/* Featured Realtors & Agencies */}
           <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase">Corretores em Destaque</h4>
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase">{t.footer.realtorsTitle}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/corretores" className="hover:text-amber-400 transition-colors">
@@ -67,8 +86,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/cadastro" className="text-xs text-amber-400/80 hover:text-amber-300 hover:underline pt-2 block">
-                  👉 É corretor? Cadastre-se na plataforma HelpUS
+                <Link href="/cadastro" className="text-xs text-amber-400/80 hover:text-amber-300 hover:underline pt-2 block font-medium">
+                  {t.footer.joinRealtor}
                 </Link>
               </li>
             </ul>
@@ -76,19 +95,23 @@ export default function Footer() {
 
           {/* Contact & Location */}
           <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase">Central de Atendimento</h4>
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase">{t.footer.contactTitle}</h4>
             <div className="space-y-2.5 text-sm">
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>João Pessoa - PB (Orla da Praia)</span>
+                <span>{t.footer.location}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>(83) 99823-4567 / (83) 99999-0000</span>
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 font-semibold transition-colors">
+                  +55 (83) 99872-1848
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>contato@helpus.com.br</span>
+                <a href="mailto:contact@helpusbr.com" className="hover:text-amber-300 transition-colors">
+                  contact@helpusbr.com
+                </a>
               </div>
             </div>
           </div>
@@ -96,9 +119,9 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
-          <p>© {new Date().getFullYear()} HelpUS Imóveis. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} {t.footer.rights}</p>
           <p className="flex items-center gap-1">
-            Desenvolvido com <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> para Corretores de Imóveis.
+            HelpUS LLC • Baldwin County AL 36542 • Made with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
           </p>
         </div>
       </div>

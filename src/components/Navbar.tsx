@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
-import { Building2, Search, Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map } from 'lucide-react';
-
+import { usePathname, useRouter } from 'next/navigation';
+import { Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map, Building2 } from 'lucide-react';
 import { LanguagePopdown } from './LanguagePopdown';
-import { translations, getLang } from '@/lib/i18n';
+import { translations, getLang, Language } from '@/lib/i18n';
 
 export default function Navbar() {
   const router = useRouter();
@@ -15,7 +14,7 @@ export default function Navbar() {
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [lang, setLang] = useState<'en' | 'es' | 'pt'>('en');
+  const [lang, setLang] = useState<Language>('en');
 
   useEffect(() => {
     fetchUserAndFavorites();
@@ -54,39 +53,34 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+    <header className="sticky top-0 z-50 bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo: HelpUS RealEstate */}
+        {/* Brand Logo: HelpUS RealEstate (No address in header as requested) */}
         <Link href="/" className="flex items-center gap-3 group">
           <img
             src="/helpus_logo.png"
             alt="HelpUS Logo"
-            className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-800 shadow-md group-hover:scale-105 transition-transform"
+            className="h-11 w-auto object-contain rounded-xl bg-white p-1 shadow-md group-hover:scale-105 transition-transform"
           />
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-xl tracking-tight text-white font-serif">HelpUS</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                REAL ESTATE
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
-              HelpUS LLC • Baldwin County AL 36542
-            </p>
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-2xl tracking-tight text-white font-sans">HelpUS</span>
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30 tracking-wider">
+              REAL ESTATE
+            </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
           <Link
             href="/"
-            className={`hover:text-amber-400 transition-colors ${pathname === '/' ? 'text-amber-400 font-semibold' : ''}`}
+            className={`hover:text-blue-400 transition-colors ${pathname === '/' ? 'text-blue-400 font-bold' : ''}`}
           >
             {t.nav.home}
           </Link>
           <Link
             href="/imoveis"
-            className={`hover:text-amber-400 transition-colors ${pathname.startsWith('/imoveis') ? 'text-amber-400 font-semibold' : ''}`}
+            className={`hover:text-blue-400 transition-colors ${pathname.startsWith('/imoveis') ? 'text-blue-400 font-bold' : ''}`}
           >
             {t.nav.properties}
           </Link>
@@ -94,10 +88,10 @@ export default function Navbar() {
           {/* Direct Map Link */}
           <Link
             href="/mapa"
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
               pathname === '/mapa'
-                ? 'bg-amber-500 text-slate-950 shadow'
-                : 'bg-amber-500/10 text-amber-300 border border-amber-500/30 hover:bg-amber-500/20'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
+                : 'bg-blue-500/10 text-blue-300 border border-blue-500/30 hover:bg-blue-500/20'
             }`}
           >
             <Map className="w-3.5 h-3.5" /> {t.nav.map}
@@ -105,7 +99,7 @@ export default function Navbar() {
 
           <Link
             href="/corretores"
-            className={`hover:text-amber-400 transition-colors ${pathname.startsWith('/corretores') ? 'text-amber-400 font-semibold' : ''}`}
+            className={`hover:text-blue-400 transition-colors ${pathname.startsWith('/corretores') ? 'text-blue-400 font-bold' : ''}`}
           >
             {t.nav.realtors}
           </Link>
@@ -118,9 +112,9 @@ export default function Navbar() {
 
           {/* Favorites counter */}
           <Link
-            href="/dashboard/cliente"
-            className="relative p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
-            title="Seus Favoritos"
+            href="/dashboard"
+            className="relative p-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
+            title={t.nav.favorites}
           >
             <Heart className="w-5 h-5" />
             {favoritesCount > 0 && (
@@ -134,28 +128,26 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center gap-3 p-1.5 pr-4 rounded-full bg-slate-900 border border-amber-500/30 hover:border-amber-500/60 transition-all text-left"
+                className="flex items-center gap-3 p-1.5 pr-4 rounded-full bg-slate-800 border border-blue-500/30 hover:border-blue-500/60 transition-all text-left"
               >
-                <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 font-bold overflow-hidden">
+                <div className="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-400 flex items-center justify-center text-blue-300 font-bold overflow-hidden">
                   {user.avatarUrl ? (
                     <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
                   ) : (
-                    user.name.charAt(0).toUpperCase()
+                    <User className="w-5 h-5" />
                   )}
                 </div>
-                <div className="text-xs">
-                  <p className="font-semibold text-white truncate max-w-[120px]">{user.name}</p>
-                  <p className="text-[10px] text-amber-400 font-mono">
-                    {user.role === 'ADMIN' ? 'ADMIN' : user.role === 'CORRETOR' ? (user.creci || 'CORRETOR') : 'COMPRADOR'}
-                  </p>
+                <div className="hidden lg:block">
+                  <p className="text-xs font-bold text-white leading-tight">{user.name}</p>
+                  <p className="text-[10px] text-blue-400 font-medium">{user.role}</p>
                 </div>
               </button>
 
               {/* Dropdown Menu */}
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-3 w-56 glass-panel-gold rounded-2xl p-2 shadow-2xl z-50 text-sm">
+                <div className="absolute right-0 mt-3 w-56 bg-slate-900 border border-slate-700 rounded-2xl p-2 shadow-2xl z-50 text-sm">
                   <div className="px-3 py-2 border-b border-slate-800 mb-1">
-                    <p className="text-xs text-slate-400">Conectado como</p>
+                    <p className="text-xs text-slate-400">{lang === 'en' ? 'Logged in as' : lang === 'es' ? 'Conectado como' : 'Conectado como'}</p>
                     <p className="text-xs font-bold text-white truncate">{user.email}</p>
                   </div>
 
@@ -164,18 +156,18 @@ export default function Navbar() {
                       <Link
                         href="/dashboard"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-amber-500/10 hover:text-amber-300 transition-colors"
+                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-blue-600/10 hover:text-blue-300 transition-colors"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-amber-400" />
-                        Painel do Corretor
+                        <LayoutDashboard className="w-4 h-4 text-blue-400" />
+                        {t.nav.dashboard}
                       </Link>
                       <Link
                         href="/dashboard/corretor/imoveis/novo"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-amber-500/10 hover:text-amber-300 transition-colors"
+                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-blue-600/10 hover:text-blue-300 transition-colors"
                       >
-                        <PlusCircle className="w-4 h-4 text-amber-400" />
-                        Cadastrar Imóvel
+                        <PlusCircle className="w-4 h-4 text-blue-400" />
+                        {lang === 'en' ? 'Add New Property' : lang === 'es' ? 'Publicar Inmueble' : 'Cadastrar Imóvel'}
                       </Link>
                     </>
                   )}
@@ -184,10 +176,10 @@ export default function Navbar() {
                     <Link
                       href="/dashboard"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-amber-500/10 hover:text-amber-300 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-blue-600/10 hover:text-blue-300 transition-colors"
                     >
                       <Heart className="w-4 h-4 text-amber-400" />
-                      Meus Favoritos
+                      {t.nav.favorites}
                     </Link>
                   )}
 
@@ -195,10 +187,10 @@ export default function Navbar() {
                     <Link
                       href="/dashboard"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-amber-500/10 hover:text-amber-300 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-200 hover:bg-blue-600/10 hover:text-blue-300 transition-colors"
                     >
-                      <ShieldCheck className="w-4 h-4 text-amber-400" />
-                      Painel Admin
+                      <ShieldCheck className="w-4 h-4 text-blue-400" />
+                      {t.nav.dashboard}
                     </Link>
                   )}
 
@@ -207,7 +199,7 @@ export default function Navbar() {
                     className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-rose-400 hover:bg-rose-500/10 transition-colors mt-1 border-t border-slate-800/60"
                   >
                     <LogOut className="w-4 h-4" />
-                    Sair da Conta
+                    {t.nav.logout}
                   </button>
                 </div>
               )}
@@ -216,15 +208,15 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-900 transition-all border border-slate-800"
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all border border-slate-700"
               >
-                Entrar
+                {t.nav.login}
               </Link>
               <Link
                 href="/cadastro"
-                className="px-4 py-2 rounded-xl text-sm font-bold bg-gold-gradient text-slate-950 hover:shadow-lg hover:shadow-amber-500/25 hover:scale-[1.02] transition-all"
+                className="px-4 py-2 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 hover:scale-[1.02] transition-all"
               >
-                Cadastrar-se
+                {t.nav.register}
               </Link>
             </div>
           )}
@@ -233,7 +225,7 @@ export default function Navbar() {
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-slate-300 hover:text-amber-400"
+          className="md:hidden p-2 text-slate-300 hover:text-blue-400"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -241,91 +233,53 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel-gold border-t border-slate-800 px-4 py-6 space-y-4">
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-slate-200 font-medium hover:text-amber-400"
-          >
-            Início
-          </Link>
-          <Link
-            href="/imoveis"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-slate-200 font-medium hover:text-amber-400"
-          >
-            Buscar Imóveis
-          </Link>
-          <Link
-            href="/mapa"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-amber-300 font-bold hover:text-amber-400"
-          >
-            🗺️ Ver Imóveis no Mapa
-          </Link>
-          <Link
-            href="/corretores"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-slate-200 font-medium hover:text-amber-400"
-          >
-            Nossos Corretores
-          </Link>
+        <div className="md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-3 pb-6 space-y-4">
+          <nav className="flex flex-col gap-3 font-semibold text-sm">
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`p-2 rounded-lg ${pathname === '/' ? 'bg-blue-600/20 text-blue-400' : 'text-slate-300'}`}
+            >
+              {t.nav.home}
+            </Link>
+            <Link
+              href="/imoveis"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`p-2 rounded-lg ${pathname.startsWith('/imoveis') ? 'bg-blue-600/20 text-blue-400' : 'text-slate-300'}`}
+            >
+              {t.nav.properties}
+            </Link>
+            <Link
+              href="/mapa"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg bg-blue-500/10 text-blue-300 border border-blue-500/30 flex items-center gap-2"
+            >
+              <Map className="w-4 h-4" /> {t.nav.map}
+            </Link>
+            <Link
+              href="/corretores"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`p-2 rounded-lg ${pathname.startsWith('/corretores') ? 'bg-blue-600/20 text-blue-400' : 'text-slate-300'}`}
+            >
+              {t.nav.realtors}
+            </Link>
+          </nav>
 
-          <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
-            {user ? (
-              <>
-                <p className="text-xs text-slate-400">Logado como: <strong className="text-white">{user.name}</strong></p>
-                {user.role === 'CORRETOR' && (
-                  <Link
-                    href="/dashboard/corretor"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full py-2.5 text-center rounded-xl bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30"
-                  >
-                    Painel do Corretor
-                  </Link>
-                )}
-                {user.role === 'CLIENT' && (
-                  <Link
-                    href="/dashboard/cliente"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full py-2.5 text-center rounded-xl bg-slate-800 text-amber-300 font-semibold"
-                  >
-                    Meus Favoritos ({favoritesCount})
-                  </Link>
-                )}
-                {user.role === 'ADMIN' && (
-                  <Link
-                    href="/dashboard/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full py-2.5 text-center rounded-xl bg-amber-500/20 text-amber-300 font-semibold"
-                  >
-                    Painel Admin
-                  </Link>
-                )}
-                <button
-                  onClick={handleLogout}
-                  className="w-full py-2.5 text-center rounded-xl bg-rose-500/10 text-rose-400 font-semibold border border-rose-500/20"
-                >
-                  Sair da Conta
-                </button>
-              </>
-            ) : (
-              <div className="grid grid-cols-2 gap-3">
-                <Link
-                  href="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="py-2.5 text-center rounded-xl bg-slate-900 text-slate-200 font-semibold border border-slate-800"
-                >
-                  Entrar
+          <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
+            <LanguagePopdown />
+            {!user ? (
+              <div className="flex items-center gap-2">
+                <Link href="/login" className="px-3 py-1.5 text-xs font-semibold text-slate-300 border border-slate-700 rounded-lg">
+                  {t.nav.login}
                 </Link>
-                <Link
-                  href="/cadastro"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="py-2.5 text-center rounded-xl bg-gold-gradient text-slate-950 font-bold"
-                >
-                  Cadastrar
+                <Link href="/cadastro" className="px-3 py-1.5 text-xs font-bold bg-blue-600 text-white rounded-lg">
+                  {t.nav.register}
                 </Link>
               </div>
+            ) : (
+              <button onClick={handleLogout} className="text-xs text-rose-400 font-semibold flex items-center gap-1">
+                <LogOut className="w-4 h-4" /> {t.nav.logout}
+              </button>
             )}
           </div>
         </div>
