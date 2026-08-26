@@ -52,7 +52,7 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
   ];
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans">
       <Navbar />
 
       {/* Hero Search Section */}
@@ -62,13 +62,13 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-widest">
-              <Sparkles className="w-4 h-4 text-blue-400" /> {t.featured.badge}
+            <div className="inline-flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
+              <Sparkles className="w-4 h-4 text-blue-600" /> {t.featured.badge}
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-white">
-              {t.featured.title} <span className="text-blue-400">{t.featured.titleHighlight}</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-slate-900">
+              {t.featured.title} <span className="text-blue-600">{t.featured.titleHighlight}</span>
             </h2>
-            <p className="text-slate-400 text-sm max-w-xl">
+            <p className="text-slate-600 text-sm max-w-xl">
               {t.featured.subtitle}
             </p>
           </div>
@@ -89,23 +89,23 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-slate-900/60 rounded-3xl p-8 border border-slate-800">
-            <p className="text-slate-400">{t.featured.noProperties}</p>
+          <div className="text-center py-16 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+            <p className="text-slate-500">{t.featured.noProperties}</p>
           </div>
         )}
       </section>
 
-      {/* Flexible Property Categories Section (No fixed location names) */}
-      <section className="py-16 bg-slate-950/80 border-y border-slate-800">
+      {/* Flexible Property Categories Section */}
+      <section className="py-16 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-3 mb-12 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-widest">
-              <MapPin className="w-4 h-4" /> {lang === 'en' ? 'Featured Categories & Regions' : lang === 'es' ? 'Categorías y Regiones Destacadas' : 'Categorias & Regiões em Destaque'}
+            <div className="inline-flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
+              <MapPin className="w-4 h-4 text-blue-600" /> {lang === 'en' ? 'Featured Categories & Regions' : lang === 'es' ? 'Categorías y Regiones Destacadas' : 'Categorias & Regiões em Destaque'}
             </div>
-            <h2 className="text-3xl font-sans font-extrabold text-white">
-              {lang === 'en' ? 'Explore Properties' : lang === 'es' ? 'Explora Inmuebles en' : 'Explore Imóveis em'} <span className="text-blue-400">{lang === 'en' ? 'Any Location' : lang === 'es' ? 'Cualquier Región' : 'Qualquer Região'}</span>
+            <h2 className="text-3xl font-sans font-extrabold text-slate-900">
+              {lang === 'en' ? 'Explore Properties' : lang === 'es' ? 'Explora Inmuebles en' : 'Explore Imóveis em'} <span className="text-blue-600">{lang === 'en' ? 'Any Location' : lang === 'es' ? 'Cualquier Región' : 'Qualquer Região'}</span>
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-600 text-sm">
               {lang === 'en' ? 'Find residential, commercial, and land opportunities across all regions.' : lang === 'es' ? 'Encuentra oportunidades residenciales, comerciales y terrenos en todas las regiones.' : 'Encontre oportunidades residenciais, comerciais e terrenos em diversas regiões.'}
             </p>
           </div>
@@ -115,19 +115,19 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
               <Link
                 key={b.name}
                 href="/imoveis"
-                className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all shadow-xl"
+                className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 border border-slate-200 hover:border-blue-500/50 transition-all shadow-md"
               >
                 <img
                   src={b.img}
                   alt={b.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-75"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4 space-y-1">
-                  <h3 className="text-lg font-sans font-bold text-white group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-lg font-sans font-bold text-white group-hover:text-blue-300 transition-colors">
                     {b.name}
                   </h3>
-                  <p className="text-xs text-slate-300">{b.desc}</p>
+                  <p className="text-xs text-slate-200">{b.desc}</p>
                 </div>
               </Link>
             ))}
@@ -136,50 +136,50 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
       </section>
 
       {/* Platform Features Section */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900">
+      <section className="py-20 bg-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-3 mb-16 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-sans font-extrabold text-white">
-              {lang === 'en' ? 'Why Choose HelpUS' : lang === 'es' ? 'Ventajas de la Plataforma' : 'Vantagens do Nosso Site'} <span className="text-blue-400">RealEstate</span>
+            <h2 className="text-3xl font-sans font-extrabold text-slate-900">
+              {lang === 'en' ? 'Why Choose HelpUS' : lang === 'es' ? 'Ventajas de la Plataforma' : 'Vantagens do Nosso Site'} <span className="text-blue-600">RealEstate</span>
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-600 text-sm">
               {lang === 'en' ? 'An integrated ecosystem uniting buyer transparency with realtor autonomy.' : lang === 'es' ? 'Un entorno integrado que une transparencia y autonomía.' : 'Um ambiente integrado que une transparência para clientes e autonomia para corretores.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-slate-900 p-8 rounded-3xl space-y-4 border border-slate-800 hover:border-blue-500/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <div className="bg-white p-8 rounded-3xl space-y-4 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                 <Building2 className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-slate-900">
                 {lang === 'en' ? 'Unified Showcase' : lang === 'es' ? 'Vitrina Unificada' : 'Vitrine Unificada'}
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {lang === 'en' ? 'All verified partner listings presented in a modern, fast-search unified showcase and interactive map.' : lang === 'es' ? 'Todos los inmuebles de agentes verificados expuestos en una vitrina moderna e interactiva.' : 'Todos os imóveis dos corretores parceiros expostos em uma única vitrine elegante e moderna de busca rápida e no mapa.'}
               </p>
             </div>
 
-            <div className="bg-slate-900 p-8 rounded-3xl space-y-4 border border-slate-800 hover:border-blue-500/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <div className="bg-white p-8 rounded-3xl space-y-4 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-slate-900">
                 {lang === 'en' ? 'Independent Realtor Portal' : lang === 'es' ? 'Portal de Agentes Autónomos' : 'Logins com Autonomia'}
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {lang === 'en' ? 'Each licensed agent manages their own portfolio, uploads photos & details, and receives leads directly.' : lang === 'es' ? 'Cada agente gestiona sus propias ofertas, sube fotos y recibe contactos de clientes.' : 'Cada corretor gerencia suas próprias ofertas, envia fotos, vídeos e recebe mensagens de compradores diretamente.'}
               </p>
             </div>
 
-            <div className="bg-slate-900 p-8 rounded-3xl space-y-4 border border-slate-800 hover:border-blue-500/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <div className="bg-white p-8 rounded-3xl space-y-4 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                 <MessageSquare className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-slate-900">
                 {lang === 'en' ? 'Direct Buyer Contacts' : lang === 'es' ? 'Contacto Directo Sin Intermediarios' : 'Contato sem Intermediários'}
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {lang === 'en' ? 'Buyer leads route instantly to the listing realtor via WhatsApp (+55 83 99872-1848) or email.' : lang === 'es' ? 'Los contactos de compradores se dirigen al instante al WhatsApp o correo del agente responsable.' : 'Leads de compradores são direcionados na hora para o WhatsApp ou e-mail do corretor responsável pelo imóvel.'}
               </p>
             </div>

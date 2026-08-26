@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, ShieldCheck, Heart, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, ShieldCheck, Heart, MessageCircle } from 'lucide-react';
 import { translations, getLang, Language } from '@/lib/i18n';
 
 export default function Footer() {
@@ -22,49 +22,49 @@ export default function Footer() {
   const whatsappUrl = `https://wa.me/${officialPhone}?text=${encodeURIComponent(t.whatsappMessage)}`;
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400">
+    <footer className="bg-white border-t border-slate-200 pt-16 pb-12 text-slate-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-slate-900">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-slate-100">
           {/* Brand & About */}
           <div className="space-y-4 md:col-span-1">
             <div className="flex items-center gap-3">
               <img
                 src="/helpus_logo.png"
                 alt="HelpUS Logo"
-                className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-800 shadow-md"
+                className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-200 shadow-sm"
               />
-              <span className="font-extrabold text-xl tracking-tight text-white font-sans">HelpUS RealEstate</span>
+              <span className="font-extrabold text-xl tracking-tight text-slate-900 font-sans">HelpUS RealEstate</span>
             </div>
-            <p className="text-sm leading-relaxed text-slate-400">
+            <p className="text-sm leading-relaxed text-slate-600">
               {t.footer.brandDesc}
             </p>
-            <div className="pt-2 flex items-center gap-2 text-xs text-blue-400 font-semibold">
-              <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0" />
+            <div className="pt-2 flex items-center gap-2 text-xs text-blue-600 font-semibold">
+              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
               <span>{t.footer.verifiedBadge}</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase">{t.footer.navTitle}</h4>
+            <h4 className="text-slate-900 font-bold text-sm tracking-wider uppercase">{t.footer.navTitle}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/imoveis?transaction=SALE" className="hover:text-blue-400 transition-colors">
+                <Link href="/imoveis?transaction=SALE" className="hover:text-blue-600 transition-colors">
                   {t.footer.forSale}
                 </Link>
               </li>
               <li>
-                <Link href="/imoveis?transaction=RENT" className="hover:text-blue-400 transition-colors">
+                <Link href="/imoveis?transaction=RENT" className="hover:text-blue-600 transition-colors">
                   {t.footer.forRent}
                 </Link>
               </li>
               <li>
-                <Link href="/mapa" className="text-blue-300 hover:text-blue-400 transition-colors font-bold flex items-center gap-1">
+                <Link href="/mapa" className="text-blue-600 hover:text-blue-700 transition-colors font-bold flex items-center gap-1">
                   🗺️ {t.nav.map}
                 </Link>
               </li>
               <li>
-                <Link href="/cadastro" className="text-xs text-blue-400 hover:text-blue-300 hover:underline pt-2 block font-medium">
+                <Link href="/cadastro" className="text-xs text-blue-600 hover:text-blue-500 hover:underline pt-2 block font-medium">
                   {t.footer.joinRealtor}
                 </Link>
               </li>
@@ -73,21 +73,21 @@ export default function Footer() {
 
           {/* Contact & Support */}
           <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase">{t.footer.contactTitle}</h4>
+            <h4 className="text-slate-900 font-bold text-sm tracking-wider uppercase">{t.footer.contactTitle}</h4>
             <div className="space-y-2.5 text-sm">
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-blue-400 shrink-0" />
+                <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
                 <span>{t.footer.location}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 font-semibold transition-colors">
+                <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 font-semibold transition-colors">
                   +55 (83) 99872-1848
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <a href="mailto:contact@helpusbr.com" className="hover:text-blue-300 transition-colors">
+                <Mail className="w-4 h-4 text-blue-600 shrink-0" />
+                <a href="mailto:contact@helpusbr.com" className="hover:text-blue-600 transition-colors">
                   contact@helpusbr.com
                 </a>
               </div>
@@ -96,7 +96,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-4 text-slate-500">
           <p>© {new Date().getFullYear()} {t.footer.rights}</p>
           <p className="flex items-center gap-1">
             HelpUS LLC • Baldwin County AL 36542 • Made with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />

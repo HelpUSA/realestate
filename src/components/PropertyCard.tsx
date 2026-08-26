@@ -105,17 +105,17 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
   };
 
   return (
-    <div className="group bg-slate-900/90 rounded-3xl overflow-hidden border border-slate-800 hover:border-blue-500/40 transition-all shadow-xl flex flex-col h-full">
+    <div className="group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-blue-400 transition-all shadow-md hover:shadow-xl flex flex-col h-full">
       {/* Image Container */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
+      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         <img
           src={imageList[currentImageIndex]}
           alt={property.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
 
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/40 pointer-events-none"></div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
 
         {/* Transaction Badge Top Left */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
@@ -123,7 +123,7 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
             {property.transactionType === 'SALE' ? t.hero.sale : property.transactionType === 'RENT' ? t.hero.rent : t.hero.allTransactions}
           </span>
           {property.featured && (
-            <span className="px-2.5 py-1 rounded-full bg-amber-500/90 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider shadow">
+            <span className="px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider shadow">
               VIP
             </span>
           )}
@@ -132,9 +132,9 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
         {/* Favorite Button Top Right */}
         <button
           onClick={handleFavoriteClick}
-          className="absolute top-3 right-3 z-10 p-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 text-slate-300 border border-slate-700 hover:text-amber-400 transition-all shadow"
+          className="absolute top-3 right-3 z-10 p-2.5 rounded-full bg-white/80 hover:bg-white text-slate-700 border border-slate-200 hover:text-amber-500 transition-all shadow-md"
         >
-          <Heart className={`w-4 h-4 ${isFavorite ? 'fill-amber-400 text-amber-400' : ''}`} />
+          <Heart className={`w-4 h-4 ${isFavorite ? 'fill-amber-500 text-amber-500' : ''}`} />
         </button>
 
         {/* Carousel Navigation Arrows */}
@@ -159,7 +159,7 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
         <div className="absolute bottom-3 left-3 z-10">
           <p className="text-xl font-extrabold text-white font-sans drop-shadow-md">
             {formatCurrency(property.price)}
-            {property.transactionType === 'RENT' && <span className="text-xs font-normal text-slate-300"> / mo</span>}
+            {property.transactionType === 'RENT' && <span className="text-xs font-normal text-slate-200"> / mo</span>}
           </p>
         </div>
       </div>
@@ -168,43 +168,43 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
       <div className="p-5 space-y-4 flex-1 flex flex-col justify-between">
         <div>
           {/* Location */}
-          <div className="flex items-center gap-1.5 text-xs text-blue-400 font-medium mb-1.5">
-            <MapPin className="w-3.5 h-3.5 shrink-0 text-blue-400" />
+          <div className="flex items-center gap-1.5 text-xs text-blue-600 font-semibold mb-1.5">
+            <MapPin className="w-3.5 h-3.5 shrink-0 text-blue-600" />
             <span className="truncate">{property.neighborhood}, {property.city}</span>
           </div>
 
           {/* Title */}
           <Link href={`/imoveis/${property.slug}`}>
-            <h3 className="text-base font-bold text-white group-hover:text-blue-300 transition-colors line-clamp-2 leading-snug">
+            <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
               {property.title}
             </h3>
           </Link>
         </div>
 
         {/* Specs Icons Grid */}
-        <div className="grid grid-cols-4 gap-2 pt-3 border-t border-slate-800/80 text-slate-300 text-xs font-medium text-center">
-          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-950">
-            <BedDouble className="w-4 h-4 text-blue-400" />
+        <div className="grid grid-cols-4 gap-2 pt-3 border-t border-slate-100 text-slate-700 text-xs font-semibold text-center">
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-50 border border-slate-100">
+            <BedDouble className="w-4 h-4 text-blue-600" />
             <span>{property.bedrooms} {t.featured.bedrooms}</span>
           </div>
-          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-950">
-            <Bath className="w-4 h-4 text-blue-400" />
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-50 border border-slate-100">
+            <Bath className="w-4 h-4 text-blue-600" />
             <span>{property.suites} {t.featured.bathrooms}</span>
           </div>
-          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-950">
-            <Car className="w-4 h-4 text-blue-400" />
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-50 border border-slate-100">
+            <Car className="w-4 h-4 text-blue-600" />
             <span>{property.parkingSpaces}</span>
           </div>
-          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-950">
-            <Maximize2 className="w-4 h-4 text-blue-400" />
+          <div className="flex flex-col items-center gap-0.5 p-1.5 rounded-xl bg-slate-50 border border-slate-100">
+            <Maximize2 className="w-4 h-4 text-blue-600" />
             <span>{property.areaTotal}m²</span>
           </div>
         </div>
 
         {/* Realtor Footer Badge */}
-        <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+        <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
           <Link href={`/corretores/${property.realtor.id}`} className="flex items-center gap-2 group/realtor">
-            <div className="w-7 h-7 rounded-full bg-blue-600/20 border border-blue-400/50 flex items-center justify-center text-blue-300 text-xs font-bold overflow-hidden shrink-0">
+            <div className="w-7 h-7 rounded-full bg-blue-100 border border-blue-300 flex items-center justify-center text-blue-700 text-xs font-bold overflow-hidden shrink-0">
               {property.realtor.avatarUrl ? (
                 <img src={property.realtor.avatarUrl} alt={property.realtor.name} className="w-full h-full object-cover" />
               ) : (
@@ -212,11 +212,11 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
               )}
             </div>
             <div className="text-left">
-              <p className="text-xs font-semibold text-slate-200 group-hover/realtor:text-blue-400 transition-colors truncate max-w-[130px]">
+              <p className="text-xs font-semibold text-slate-800 group-hover/realtor:text-blue-600 transition-colors truncate max-w-[130px]">
                 {property.realtor.agencyName || property.realtor.name}
               </p>
-              <p className="text-[10px] text-slate-400 font-mono flex items-center gap-0.5">
-                <ShieldCheck className="w-2.5 h-2.5 text-blue-400" />
+              <p className="text-[10px] text-slate-500 font-mono flex items-center gap-0.5">
+                <ShieldCheck className="w-2.5 h-2.5 text-blue-600" />
                 {property.realtor.creci || 'Verified Agent'}
               </p>
             </div>
@@ -224,7 +224,7 @@ export default function PropertyCard({ property, isFavoriteInitial = false, onFa
 
           <Link
             href={`/imoveis/${property.slug}`}
-            className="px-3 py-1.5 rounded-xl bg-blue-600/10 hover:bg-blue-600 text-blue-300 hover:text-white font-bold text-xs transition-all border border-blue-500/30"
+            className="px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white font-bold text-xs transition-all border border-blue-200"
           >
             {t.featured.viewDetails}
           </Link>

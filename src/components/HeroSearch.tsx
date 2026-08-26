@@ -39,49 +39,42 @@ export default function HeroSearch() {
   };
 
   return (
-    <div className="relative min-h-[75vh] flex items-center justify-center pt-10 pb-16 overflow-hidden bg-slate-950">
+    <div className="relative min-h-[75vh] flex items-center justify-center pt-10 pb-16 overflow-hidden bg-[#f8fafc]">
       {/* Animated Ambient Glowing Mesh Background */}
       <AmbientMeshBackground />
 
-      {/* Background Image overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
-          alt="Luxury Real Estate"
-          className="w-full h-full object-cover opacity-25 scale-105 filter saturate-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/75 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-transparent to-[#0f172a]/90"></div>
-      </div>
-
+      {/* Hero Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-8">
         {/* Badge Slogan */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold tracking-wider uppercase shadow-lg">
-          <Sparkles className="w-4 h-4 text-blue-400" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold tracking-wider uppercase shadow-sm">
+          <Sparkles className="w-4 h-4 text-blue-600" />
           {t.hero.badge}
         </div>
 
         {/* Hero Title */}
-        <div className="space-y-4 max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl font-extrabold font-sans text-white tracking-tight leading-tight">
-            {t.hero.titleLine1} <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">{t.hero.titleHighlight}</span>
+        <div className="space-y-4">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 font-sans tracking-tight leading-tight">
+            {t.hero.titleLine1}{' '}
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+              {t.hero.titleHighlight}
+            </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
             {t.hero.subtitle}
           </p>
         </div>
 
-        {/* Search Bar Container (Signature HelpUS Clean Navy Panel) */}
-        <div className="bg-slate-900/90 backdrop-blur-xl rounded-3xl p-4 sm:p-6 shadow-2xl max-w-4xl mx-auto border border-slate-800">
-          {/* Tabs: Sale / Rent / All */}
-          <div className="flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
+        {/* Search Panel Box - Clean White Glassmorphism */}
+        <div className="bg-white/95 backdrop-blur-xl p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-2xl space-y-4 text-left">
+          {/* Tabs for Transaction Type */}
+          <div className="flex items-center gap-2 border-b border-slate-100 pb-3 overflow-x-auto">
             <button
               type="button"
               onClick={() => setTransaction('ALL')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 transaction === 'ALL'
                   ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               {t.hero.allTransactions}
@@ -89,10 +82,10 @@ export default function HeroSearch() {
             <button
               type="button"
               onClick={() => setTransaction('SALE')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 transaction === 'SALE'
                   ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               {t.hero.sale}
@@ -100,88 +93,85 @@ export default function HeroSearch() {
             <button
               type="button"
               onClick={() => setTransaction('RENT')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 transaction === 'RENT'
                   ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               {t.hero.rent}
             </button>
           </div>
 
-          {/* Form Inputs Grid */}
-          <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-            {/* Search Term / Keyword */}
+          {/* Form Controls */}
+          <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Input Search Keyword */}
             <div className="relative">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 text-left">
-                {lang === 'en' ? 'Keyword / Search' : lang === 'es' ? 'Palabra Clave' : 'Palavra-Chave'}
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {lang === 'en' ? 'Keyword / City' : lang === 'es' ? 'Palabra clave / Ciudad' : 'Palavra-chave'}
               </label>
               <div className="relative">
-                <Search className="w-4 h-4 text-blue-400 absolute left-3 top-3.5" />
+                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   type="text"
-                  placeholder={t.hero.searchPlaceholder}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full bg-slate-950 text-white placeholder-slate-500 text-xs sm:text-sm rounded-xl pl-9 pr-3 py-3 border border-slate-800 focus:border-blue-500 focus:outline-none transition-colors"
+                  placeholder={t.hero.searchPlaceholder}
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
                 />
               </div>
             </div>
 
-            {/* Neighborhood */}
-            <div className="relative">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 text-left">
-                {lang === 'en' ? 'Neighborhood' : lang === 'es' ? 'Barrio / Región' : 'Bairro / Região'}
+            {/* Select Neighborhood */}
+            <div>
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {lang === 'en' ? 'Neighborhood / Region' : lang === 'es' ? 'Barrio / Región' : 'Bairro / Região'}
               </label>
               <div className="relative">
-                <MapPin className="w-4 h-4 text-blue-400 absolute left-3 top-3.5" />
+                <MapPin className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                 <select
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
-                  className="w-full bg-slate-950 text-white text-xs sm:text-sm rounded-xl pl-9 pr-3 py-3 border border-slate-800 focus:border-blue-500 focus:outline-none transition-colors appearance-none"
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all appearance-none cursor-pointer"
                 >
                   <option value="">{lang === 'en' ? 'All Neighborhoods' : lang === 'es' ? 'Todos los Barrios' : 'Todos os Bairros'}</option>
-                  <option value="Cabo Branco">Cabo Branco</option>
-                  <option value="Manaíra">Manaíra</option>
-                  <option value="Altiplano">Altiplano</option>
-                  <option value="Tambaú">Tambaú</option>
-                  <option value="Bessa">Bessa</option>
-                  <option value="Gulf Shores">Gulf Shores, AL</option>
-                  <option value="Orange Beach">Orange Beach, AL</option>
+                  <option value="Beira-mar">Beira-mar / Orla</option>
+                  <option value="Centro">Centro / Urbano</option>
+                  <option value="Condomínio">Condomínio Fechado</option>
+                  <option value="Comercial">Zona Comercial</option>
                 </select>
               </div>
             </div>
 
-            {/* Property Type */}
-            <div className="relative">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 text-left">
+            {/* Select Type */}
+            <div>
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
                 {t.hero.propertyType}
               </label>
               <div className="relative">
-                <Building className="w-4 h-4 text-blue-400 absolute left-3 top-3.5" />
+                <Building className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
-                  className="w-full bg-slate-950 text-white text-xs sm:text-sm rounded-xl pl-9 pr-3 py-3 border border-slate-800 focus:border-blue-500 focus:outline-none transition-colors appearance-none"
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all appearance-none cursor-pointer"
                 >
                   <option value="ALL">{t.hero.allTypes}</option>
-                  <option value="HOUSE">{t.hero.house}</option>
                   <option value="APARTMENT">{t.hero.apartment}</option>
+                  <option value="HOUSE">{t.hero.house}</option>
                   <option value="PENTHOUSE">{t.hero.penthouse}</option>
+                  <option value="LAND">{t.hero.land}</option>
                   <option value="COMMERCIAL">{t.hero.commercial}</option>
                 </select>
               </div>
             </div>
 
-            {/* Submit Search Button */}
+            {/* Submit Button */}
             <div className="flex items-end">
               <button
                 type="submit"
-                className="w-full h-[46px] bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm"
+                className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 flex items-center justify-center gap-2 transition-all transform active:scale-95"
               >
-                <Search className="w-4 h-4" />
-                {t.hero.searchBtn}
+                <Search className="w-4 h-4" /> {t.hero.searchBtn}
               </button>
             </div>
           </form>
