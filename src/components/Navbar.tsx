@@ -53,72 +53,80 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo: HelpUS RealEstate */}
-        <Link href="/" className="flex items-center gap-3 group">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
+        
+        {/* Brand Logo & Real Estate Badge */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
           <img
             src="/helpus_logo.png"
             alt="HelpUS Logo"
-            className="h-11 w-auto object-contain rounded-xl bg-white p-1 border border-slate-200 shadow-sm group-hover:scale-105 transition-transform"
+            className="h-10 w-auto object-contain rounded-xl bg-white p-1 border border-slate-200 shadow-sm group-hover:scale-105 transition-transform"
           />
-          <div className="flex items-center gap-2">
-            <span className="font-extrabold text-2xl tracking-tight text-slate-900 font-sans">HelpUS</span>
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 tracking-wider">
+          <div className="flex items-center gap-1.5">
+            <span className="font-extrabold text-xl tracking-tight text-slate-900 font-sans">HelpUS</span>
+            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 tracking-wider whitespace-nowrap shrink-0">
               REAL ESTATE
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+        {/* Desktop Navigation Links (No line breaks, no overlaps) */}
+        <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-700">
           <Link
             href="/"
-            className={`hover:text-blue-600 transition-colors ${pathname === '/' ? 'text-blue-600 font-bold' : ''}`}
+            className={`px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+              pathname === '/' ? 'text-blue-600 font-bold bg-blue-50' : 'hover:text-blue-600 hover:bg-slate-100'
+            }`}
           >
             {t.nav.home}
           </Link>
           <Link
             href="/imoveis"
-            className={`hover:text-blue-600 transition-colors ${pathname.startsWith('/imoveis') ? 'text-blue-600 font-bold' : ''}`}
+            className={`px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+              pathname.startsWith('/imoveis') ? 'text-blue-600 font-bold bg-blue-50' : 'hover:text-blue-600 hover:bg-slate-100'
+            }`}
           >
             {t.nav.properties}
           </Link>
 
-          {/* Direct Map Link */}
+          {/* Interactive Map Button */}
           <Link
             href="/mapa"
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
               pathname === '/mapa'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                : 'bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100'
+                ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30'
+                : 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100'
             }`}
           >
-            <Map className="w-3.5 h-3.5" /> {t.nav.map}
+            <Map className="w-3.5 h-3.5 shrink-0" />
+            <span>{t.nav.map}</span>
           </Link>
 
           <Link
             href="/corretores"
-            className={`hover:text-blue-600 transition-colors ${pathname.startsWith('/corretores') ? 'text-blue-600 font-bold' : ''}`}
+            className={`px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+              pathname.startsWith('/corretores') ? 'text-blue-600 font-bold bg-blue-50' : 'hover:text-blue-600 hover:bg-slate-100'
+            }`}
           >
             {t.nav.realtors}
           </Link>
         </nav>
 
-        {/* Desktop Action & Auth Menu */}
-        <div className="hidden md:flex items-center gap-4">
-          {/* Language Popdown Dropdown */}
+        {/* Desktop Actions & Language Popdown */}
+        <div className="hidden md:flex items-center gap-3 shrink-0">
+          {/* Language Selector */}
           <LanguagePopdown />
 
-          {/* Favorites counter */}
+          {/* Favorites Counter */}
           <Link
             href="/dashboard"
-            className="relative p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all"
+            className="relative p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shrink-0"
             title={t.nav.favorites}
           >
-            <Heart className="w-5 h-5 text-slate-700" />
+            <Heart className="w-4 h-4 text-slate-700" />
             {favoritesCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-blue-600 text-white font-bold text-xs rounded-full flex items-center justify-center shadow">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white font-bold text-[10px] rounded-full flex items-center justify-center shadow">
                 {favoritesCount}
               </span>
             )}
@@ -128,17 +136,17 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center gap-3 p-1.5 pr-4 rounded-full bg-slate-100 border border-slate-200 hover:border-blue-400 transition-all text-left"
+                className="flex items-center gap-2.5 p-1 pr-3 rounded-full bg-slate-100 border border-slate-200 hover:border-blue-400 transition-all text-left"
               >
-                <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center overflow-hidden">
+                <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center overflow-hidden shrink-0">
                   {user.avatarUrl ? (
                     <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
                   ) : (
-                    <User className="w-5 h-5" />
+                    <User className="w-4 h-4" />
                   )}
                 </div>
-                <div className="hidden lg:block">
-                  <p className="text-xs font-bold text-slate-900 leading-tight">{user.name}</p>
+                <div className="hidden xl:block">
+                  <p className="text-xs font-bold text-slate-900 leading-tight truncate max-w-[100px]">{user.name}</p>
                   <p className="text-[10px] text-blue-600 font-semibold">{user.role}</p>
                 </div>
               </button>
@@ -178,47 +186,48 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 transition-all"
+                className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 transition-all whitespace-nowrap"
               >
                 {t.nav.login}
               </Link>
               <Link
                 href="/cadastro"
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition-all flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-sm shadow-blue-600/30 transition-all flex items-center gap-1.5 whitespace-nowrap"
               >
-                <ShieldCheck className="w-4 h-4" /> {t.nav.register}
+                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                <span>{t.nav.register}</span>
               </Link>
             </div>
           )}
         </div>
 
-        {/* Mobile Hamburger Menu Button */}
+        {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800"
+          className="lg:hidden p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 shrink-0"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-4 shadow-xl">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-4 shadow-xl">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <LanguagePopdown />
           </div>
 
-          <nav className="flex flex-col space-y-2 text-sm font-semibold text-slate-800">
+          <nav className="flex flex-col space-y-1.5 text-sm font-semibold text-slate-800">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-slate-100">
               {t.nav.home}
             </Link>
             <Link href="/imoveis" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-slate-100">
               {t.nav.properties}
             </Link>
-            <Link href="/mapa" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl bg-blue-50 text-blue-700 font-bold flex items-center gap-2">
+            <Link href="/mapa" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl bg-blue-50 text-blue-600 font-bold flex items-center gap-2">
               <Map className="w-4 h-4" /> {t.nav.map}
             </Link>
             <Link href="/corretores" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-slate-100">
