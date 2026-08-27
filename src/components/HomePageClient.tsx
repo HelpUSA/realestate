@@ -9,6 +9,9 @@ import HeroSearch from '@/components/HeroSearch';
 import PropertyCard from '@/components/PropertyCard';
 import { translations, getLang, Language } from '@/lib/i18n';
 
+import PropertyMap from '@/components/PropertyMap';
+import { Map } from 'lucide-react';
+
 interface HomePageClientProps {
   featuredProperties: any[];
 }
@@ -58,8 +61,44 @@ export default function HomePageClient({ featuredProperties }: HomePageClientPro
       {/* Hero Search Section */}
       <HeroSearch />
 
+      {/* Interactive Property Map Section (Before Featured Portfolio) */}
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest border border-blue-200">
+                <Map className="w-4 h-4 text-blue-600" />
+                {lang === 'en' ? 'Interactive Map Navigation' : lang === 'es' ? 'Navegación Interactiva en Mapa' : 'Navegação por Mapa Interativo'}
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans">
+                {lang === 'en' ? 'Explore Properties on Map' : lang === 'es' ? 'Explora Inmuebles en el Mapa' : 'Explore Imóveis no Mapa'}
+              </h2>
+              <p className="text-slate-600 text-xs sm:text-sm max-w-xl">
+                {lang === 'en'
+                  ? 'Zoom, navigate regions, and click property markers to view price, photos, and listing details.'
+                  : lang === 'es'
+                  ? 'Haz zoom, navega regiones y haz clic en los marcadores para ver precio, fotos y detalles.'
+                  : 'Navegue, aplique zoom e clique nos marcadores para ver preços, fotos e abrir a página do imóvel.'}
+              </p>
+            </div>
+
+            <Link
+              href="/mapa"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 font-bold text-xs transition-all shrink-0"
+            >
+              <Map className="w-4 h-4" />
+              {lang === 'en' ? 'Full Screen Map ↗' : lang === 'es' ? 'Mapa Completo ↗' : 'Mapa em Tela Cheia ↗'}
+            </Link>
+          </div>
+
+          <div className="h-[460px] w-full rounded-2xl overflow-hidden shadow-inner">
+            <PropertyMap properties={featuredProperties} />
+          </div>
+        </div>
+      </section>
+
       {/* Featured Properties Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
