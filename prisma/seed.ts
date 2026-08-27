@@ -17,7 +17,22 @@ async function main() {
   const defaultPasswordHash = await bcrypt.hash('123456', 10);
   const adminPasswordHash = await bcrypt.hash('admin123', 10);
 
-  // 1. Create Admin / Developer
+  // 1. Create Super Admin (HelpUS Account)
+  const superAdmin = await prisma.user.create({
+    data: {
+      name: 'HelpUS Administrador',
+      email: 'helpus.ecommerce@gmail.com',
+      password: adminPasswordHash,
+      role: 'ADMIN',
+      status: 'ACTIVE',
+      phone: '(83) 99872-1848',
+      whatsapp: '5583998721848',
+      bio: 'Super Administrador da Plataforma HelpUS RealEstate.',
+      avatarUrl: '/helpus_logo.png',
+    },
+  });
+
+  // 1b. Create Admin / Developer
   const admin = await prisma.user.create({
     data: {
       name: 'Admin Desenvolvedor',

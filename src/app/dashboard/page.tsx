@@ -40,7 +40,7 @@ export default async function DashboardPage() {
     const totalLeads = await prisma.leadInquiry.count();
 
     return (
-      <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans">
+      <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans">
         <Navbar />
         <AdminDashboardClient
           initialUsers={users}

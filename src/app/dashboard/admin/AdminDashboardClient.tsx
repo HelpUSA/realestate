@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ShieldCheck, Users, Building2, MessageSquare, Check, X, Server, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import { ShieldCheck, Users, Building2, MessageSquare, PlusCircle, ExternalLink, Trash2, Edit } from 'lucide-react';
 
 export default function AdminDashboardClient({
   initialUsers,
@@ -33,53 +34,80 @@ export default function AdminDashboardClient({
   const realtors = users.filter((u) => u.role === 'CORRETOR');
 
   return (
-    <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 space-y-10">
-      {/* Admin Banner */}
-      <div className="glass-panel-gold p-6 sm:p-8 rounded-3xl border border-amber-500/40 space-y-2 shadow-xl">
-        <div className="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-widest">
-          <ShieldCheck className="w-4 h-4" /> Painel de Controle do Desenvolvedor & Admin
+    <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 space-y-10 font-sans text-slate-900">
+      {/* Super Admin Welcome Banner */}
+      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest border border-blue-200">
+              <ShieldCheck className="w-4 h-4 text-blue-600" /> Super Admin — helpus.ecommerce@gmail.com
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans">
+              Painel de Administração <span className="text-blue-600">HelpUS RealEstate</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Gerenciamento completo de usuários, aprovação de corretores credenciados, controle de imóveis e leads da plataforma.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard/corretor/imoveis/novo"
+              className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 flex items-center gap-2 transition-all"
+            >
+              <PlusCircle className="w-4 h-4" /> Cadastrar Novo Imóvel
+            </Link>
+          </div>
         </div>
-        <h1 className="text-3xl font-serif font-extrabold text-white">
-          Gestão Global do <span className="text-gold-gradient">Site Guarda-Chuva</span>
-        </h1>
-        <p className="text-xs text-slate-400">
-          Gerencie o status dos corretores cadastrados, controle permissões e acesse os guias de infraestrutura (Vercel + Railway).
-        </p>
       </div>
 
-      {/* Overview Cards */}
+      {/* Overview Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs text-slate-400">Corretores Cadastrados</p>
-          <p className="text-2xl font-extrabold text-amber-400 font-serif">{realtors.length}</p>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Corretores</span>
+            <Users className="w-4 h-4 text-blue-600" />
+          </div>
+          <p className="text-2xl font-extrabold text-slate-900">{realtors.length}</p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs text-slate-400">Imóveis na Vitrine</p>
-          <p className="text-2xl font-extrabold text-white font-serif">{totalProperties}</p>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Imóveis no Ar</span>
+            <Building2 className="w-4 h-4 text-blue-600" />
+          </div>
+          <p className="text-2xl font-extrabold text-blue-600">{totalProperties}</p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs text-slate-400">Leads Gerados</p>
-          <p className="text-2xl font-extrabold text-emerald-400 font-serif">{totalLeads}</p>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Leads Gerados</span>
+            <MessageSquare className="w-4 h-4 text-emerald-600" />
+          </div>
+          <p className="text-2xl font-extrabold text-emerald-600">{totalLeads}</p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs text-slate-400">Total de Usuários</p>
-          <p className="text-2xl font-extrabold text-white font-serif">{users.length}</p>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Total Usuários</span>
+            <ShieldCheck className="w-4 h-4 text-indigo-600" />
+          </div>
+          <p className="text-2xl font-extrabold text-slate-900">{users.length}</p>
         </div>
       </div>
 
-      {/* Realtors Management Table */}
+      {/* Realtors Management Section */}
       <div className="space-y-4">
-        <h2 className="text-xl font-serif font-bold text-white">
-          Corretores Registrados na Plataforma
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-slate-900">
+            Gestão de Corretores & Permissões
+          </h2>
+        </div>
 
-        <div className="glass-panel rounded-3xl border border-slate-800 overflow-hidden">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+              <thead className="bg-slate-50 text-slate-700 uppercase tracking-wider font-bold border-b border-slate-200">
                 <tr>
                   <th className="p-4">Corretor / Agência</th>
                   <th className="p-4">E-mail</th>
@@ -89,21 +117,21 @@ export default function AdminDashboardClient({
                   <th className="p-4 text-right">Ação Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-200">
+              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                 {realtors.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-900/50 transition-colors">
-                    <td className="p-4 font-bold text-white">
+                  <tr key={r.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="p-4 font-bold text-slate-900">
                       {r.agencyName || r.name}
                     </td>
                     <td className="p-4">{r.email}</td>
-                    <td className="p-4 font-mono text-amber-400 font-semibold">{r.creci || 'CRECI 8492-F'}</td>
-                    <td className="p-4 font-mono">{r._count?.properties || 0}</td>
+                    <td className="p-4 font-mono text-blue-600 font-bold">{r.creci || 'CRECI 8492-F'}</td>
+                    <td className="p-4 font-mono font-bold text-slate-900">{r._count?.properties || 0}</td>
                     <td className="p-4">
                       <span
                         className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase ${
                           r.status === 'ACTIVE'
-                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                            : 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
+                            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                            : 'bg-rose-50 text-rose-600 border border-rose-200'
                         }`}
                       >
                         {r.status === 'ACTIVE' ? 'Ativo' : 'Suspenso'}
@@ -113,14 +141,14 @@ export default function AdminDashboardClient({
                       {r.status === 'ACTIVE' ? (
                         <button
                           onClick={() => handleUpdateStatus(r.id, 'BLOCKED')}
-                          className="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white font-bold transition-all"
+                          className="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-600 hover:text-white font-bold transition-all"
                         >
                           Suspender
                         </button>
                       ) : (
                         <button
                           onClick={() => handleUpdateStatus(r.id, 'ACTIVE')}
-                          className="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-white font-bold transition-all"
+                          className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-600 hover:text-white font-bold transition-all"
                         >
                           Aprovar / Ativar
                         </button>
@@ -131,28 +159,6 @@ export default function AdminDashboardClient({
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-
-      {/* Deployment & Infra Guide Box */}
-      <div className="glass-panel p-8 rounded-3xl border border-slate-800 space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-            <Server className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="text-lg font-serif font-bold text-white">Instruções de Deploy (Git, Vercel & Railway)</h3>
-            <p className="text-xs text-slate-400">Variáveis de ambiente e banco de dados em nuvem</p>
-          </div>
-        </div>
-
-        <div className="text-xs text-slate-300 space-y-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 font-mono">
-          <p><strong>1. Repositório Git:</strong> Git já está inicializado nesta pasta (<code>D:\dev\AntiG\imoveis</code>).</p>
-          <p><strong>2. Railway (PostgreSQL DB):</strong> Crie um projeto no Railway, adicione um banco PostgreSQL e copie a <code>DATABASE_URL</code> no dashboard do Railway.</p>
-          <p><strong>3. Vercel (Frontend Next.js):</strong> Conecte o repositório no Vercel e adicione as seguintes variáveis de ambiente:</p>
-          <p className="text-amber-400 pl-4">• DATABASE_URL="postgresql://user:pass@railway.app:5432/railway"</p>
-          <p className="text-amber-400 pl-4">• NEXTAUTH_SECRET="sua-chave-secreta-jwt-2026"</p>
-          <p className="text-amber-400 pl-4">• JWT_SECRET="sua-chave-secreta-jwt-2026"</p>
         </div>
       </div>
     </div>
