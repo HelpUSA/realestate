@@ -9,8 +9,17 @@ import HeroSearch from '@/components/HeroSearch';
 import PropertyCard from '@/components/PropertyCard';
 import { translations, getLang, Language } from '@/lib/i18n';
 
-import PropertyMap from '@/components/PropertyMap';
+import dynamic from 'next/dynamic';
 import { Map } from 'lucide-react';
+
+const PropertyMap = dynamic(() => import('@/components/PropertyMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full min-h-[420px] bg-slate-100 rounded-3xl border border-slate-200 flex items-center justify-center text-slate-500 text-xs font-bold animate-pulse">
+      Carregando Mapa Interativo...
+    </div>
+  ),
+});
 
 interface HomePageClientProps {
   featuredProperties: any[];

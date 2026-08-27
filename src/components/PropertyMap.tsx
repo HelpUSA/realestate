@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import L from 'leaflet';
 
 interface PropertyMapProps {
   properties: Array<{
@@ -87,6 +86,7 @@ function MapContainerWrapper({
   formatCurrency: (v: number) => string;
   singleMode: boolean;
 }) {
+  const L = require('leaflet');
   const { MapContainer, TileLayer, Marker, Popup } = require('react-leaflet');
 
   const validProperties = properties.filter(
