@@ -14,11 +14,20 @@ export default async function RealtorProfilePage({
 }) {
   const { id } = await params;
 
-  // Check if searching by ID, email, or "waleska"
-  const isWaleskaAlias = id.toLowerCase() === 'waleska';
+  const normalizedId = id.toLowerCase();
+  const isWaleskaAlias = normalizedId.includes('waleska');
+  const isDanyAlias = normalizedId.includes('dany');
 
   const realtor = await prisma.user.findFirst({
-    where: isWaleskaAlias
+    where: isDanyAlias
+      ? {
+          OR: [
+            { name: { contains: 'Dany' } },
+            { agencyName: { contains: 'DNA' } },
+            { email: { contains: 'dany' } },
+          ],
+        }
+      : isWaleskaAlias
       ? {
           OR: [
             { name: { contains: 'Waleska' } },
