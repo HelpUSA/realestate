@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map } from 'lucide-react';
+import { Heart, User, LogOut, LayoutDashboard, PlusCircle, ShieldCheck, Menu, X, Map, Calculator } from 'lucide-react';
 import { LanguagePopdown } from './LanguagePopdown';
 import { translations, getLang, Language } from '@/lib/i18n';
+import { FinancingCalculatorModal } from './FinancingCalculatorModal';
 
 export default function Navbar() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function Navbar() {
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [lang, setLang] = useState<Language>('en');
 
   useEffect(() => {
@@ -102,6 +104,16 @@ export default function Navbar() {
             <Map className="w-3.5 h-3.5 shrink-0" />
             <span>{t.nav.map}</span>
           </Link>
+
+          {/* Financing Calculator Button */}
+          <button
+            type="button"
+            onClick={() => setIsCalculatorOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition-all cursor-pointer"
+          >
+            <Calculator className="w-3.5 h-3.5 shrink-0 text-amber-600" />
+            <span>Simulador</span>
+          </button>
 
           <Link
             href="/corretores"
@@ -273,6 +285,12 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Financing Calculator Modal */}
+      <FinancingCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+      />
     </header>
   );
 }

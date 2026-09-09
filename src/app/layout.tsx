@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "HelpUS RealEstate — Premier Real Estate & Realtor Network",
@@ -22,6 +23,13 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         {children}
         <FloatingWhatsApp />
+        <Script
+          src="http://localhost:4000/public/widget.js"
+          data-title="RealEstate AI Assistant"
+          data-subtitle="Atendimento & Imóveis 24/7"
+          data-primary-color="#3b82f6"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
